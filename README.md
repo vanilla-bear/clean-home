@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🧼 Ménage – Application de gestion des tâches ménagères
 
-First, run the development server:
+Ce projet est une application Next.js générée avec [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+---
+
+## 🚀 Démarrer le projet
+
+Lancez le serveur de développement avec :
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir le résultat.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Vous pouvez commencer à modifier la page en éditant `app/page.tsx`. Le rechargement est automatique.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ce projet utilise [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) pour optimiser et charger automatiquement [Geist](https://vercel.com/font), une police créée par Vercel.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📚 En savoir plus
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Pour aller plus loin avec Next.js :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Documentation Next.js (FR)](https://nextjs.org/docs) – toutes les fonctionnalités et l'API.
+- [Apprendre Next.js](https://nextjs.org/learn) – tutoriel interactif.
+- [Dépôt GitHub Next.js](https://github.com/vercel/next.js) – contributions bienvenues !
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Déploiement avec Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+La méthode la plus simple pour déployer votre application Next.js est d’utiliser [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme), la plateforme des créateurs de Next.js.
+
+Consultez la [documentation de déploiement](https://nextjs.org/docs/app/building-your-application/deploying) pour plus d’infos.
+
+---
+
+## ⚙️ Stack technique
+
+| Frontend | Backend | Base de données | Authentification | Outils |
+|----------|---------|-----------------|------------------|--------|
+| Next.js 14+, TypeScript, Tailwind CSS, Turbopack | API Routes Next.js | Supabase (PostgreSQL) avec Prisma | NextAuth.js (Auth.js) + Google OAuth | React Hook Form, Zod, FullCalendar, date-fns |
+
+---
+
+## 🧑‍💻 Prérequis
+
+- Node.js 18+
+- Un compte Supabase (base PostgreSQL)
+- Un projet Google Cloud avec identifiants OAuth 2.0
+
+---
+
+## 🏗️ Installation rapide
+
+1. **Création du projet**
+
+```bash
+npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias "@/*" --use-npm
+```
+
+---
+
+## 🗂️ Structure du projet (extrait)
+
+```
+src/
+├── app/
+│   ├── (auth)/login/
+│   ├── (dashboard)/page.tsx
+│   └── api/tasks/[taskId]/complete/
+├── components/
+│   ├── calendar/TaskCalendar.tsx
+│   ├── tasks/TaskForm.tsx
+├── lib/
+│   ├── auth/
+│   └── db/prisma.ts
+├── utils/recurrence.ts
+```

@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Room {
+  salon
+  cuisine
+  entree
+  toilettes
+  salle_de_bain
+  chambre_principale
+  chambre_secondaire
+}
+
+model Task {
+  id              String      @id @default(uuid())
+  title           String
+  description     String?
+  room            Room
+  frequency_type  String      // 'daily' | 'weekly' | 'monthly'
+  frequency_value Int
+  created_at      DateTime    @default(now())
+  last_executed_at DateTime?
+  next_execution  DateTime
+  completed       Boolean     @default(false)
+  user_id         String
+  execution_history Json      @default("[]")
+
+  @@index([user_id])
+  @@index([next_execution])
+}
