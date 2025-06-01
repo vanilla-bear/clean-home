@@ -1,6 +1,7 @@
 import { addDays, addWeeks, addMonths } from 'date-fns';
 import { prisma } from './prisma';
 import { Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 export type FrequencyType = 'daily' | 'weekly' | 'monthly';
 export type Room = 'salon' | 'cuisine' | 'entree' | 'toilettes' | 'salle_de_bain' | 'chambre_principale' | 'chambre_secondaire';
@@ -142,4 +143,45 @@ function calculateCompletionRate(
   }
 
   return expectedExecutions > 0 ? (executionsCount / expectedExecutions) * 100 : 100;
+}
+
+export function calculateNextExecution(
+  baseDate: Date,
+  frequencyType: FrequencyType,
+  frequencyValue: number
+): Date {
+  switch (frequencyType) {
+    case 'daily':
+      return addDays(baseDate, frequencyValue);
+    case 'weekly':
+      return addWeeks(baseDate, frequencyValue);
+    case 'monthly':
+      return addMonths(baseDate, frequencyValue);
+    default:
+      throw new Error('Type de fréquence invalide');
+  }
+}
+
+export async function updateTask(taskId: string, data: {
+  title: string;
+  description: string;
+  room: Room;
+  frequency: {
+    type: 'daily' | 'weekly' | 'monthly';
+    value: number;
+  };
+}) {
+  const response = await fetch(`/api/tasks/${taskId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error('Erreur lors de la mise à jour de la tâche');
+  }
+
+  return response.json();
 } 
